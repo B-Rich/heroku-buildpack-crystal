@@ -31,6 +31,7 @@ cd $BUILD_DIR
 if [ -f shard.yml ]; then
   echo "-----> Installing Dependencies"
   $CRYSTAL_DIR/bin/crystal deps install --production
+  cd libs/common_mark/ext && make
 fi
 
 if [ -f app.cr ]; then
