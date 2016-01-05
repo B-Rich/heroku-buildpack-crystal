@@ -21,12 +21,12 @@ if [ -f shard.yml ]; then
   $CRYSTAL_DIR/bin/crystal deps install --production
 fi
 
-if [ -f app.cr ] 
+if [ -f app.cr ]; then
   echo "-----> Compiling app.cr"
   $CRYSTAL_DIR/bin/crystal build app.cr --release
 fi
 
-if [ -f Makefile ] 
+if [ -f Makefile ]; then
   echo "-----> Running make"
   make RELEASE=1
 fi
