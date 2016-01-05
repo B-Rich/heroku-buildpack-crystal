@@ -13,6 +13,17 @@ mkdir -p $CRYSTAL_DIR
 curl -sL $CRYSTAL_URL | tar xz -C $CRYSTAL_DIR --strip-component=1
 export PATH="$PATH:/tmp/crystal"
 
+# Export environment variables
+if [ -d "$ENV_DIR" ]; then
+  whitelist_regex=${2:-''}
+  blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
+
+  for e in $(ls $env_dir); do
+    echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
+    export "$e=$(cat $ENV_DIR/$e)"
+  done
+fi
+
 # Build the project
 cd $BUILD_DIR
 
