@@ -28,5 +28,5 @@ fi
 
 if [ -f Makefile ]; then
   echo "-----> Running make"
-  make RELEASE=1
+  make RELEASE=1 CRYSTAL_BIN=/tmp/crystal/bin/crystal
 fi
