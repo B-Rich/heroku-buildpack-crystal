@@ -11,6 +11,7 @@ unset GIT_DIR
 echo "-----> Installing Crystal"
 mkdir -p $CRYSTAL_DIR
 curl -sL $CRYSTAL_URL | tar xz -C $CRYSTAL_DIR --strip-component=1
+export PATH="$PATH:/tmp/crystal"
 
 # Build the project
 cd $BUILD_DIR
@@ -23,4 +24,9 @@ fi
 if [ -f app.cr ] 
   echo "-----> Compiling app.cr"
   $CRYSTAL_DIR/bin/crystal build app.cr --release
+fi
+
+if [ -f Makefile ] 
+  echo "-----> Running make"
+  make RELEASE=1
 fi
